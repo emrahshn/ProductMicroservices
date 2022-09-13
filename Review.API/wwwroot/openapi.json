@@ -1,0 +1,288 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Review API",
+    "version": "v1",
+    "description": "This solution has been prepared for Beerwulf organization's [Beerwulf.Assessment Github project](https://github.com/Beerwulf/Beerwulf.Assessment). The project has been prepared in accordance with the layered microservice architecture. All microservices are accessible under the **Microservices** folder in the solution. **Review.API** project has been designed as a gateway project. The **Review.API** project can also be used as middleware for another internal web project. The [Ocelot](https://github.com/ThreeMammals/Ocelot) library has been used to prepare the microservices, and the [SwaggerForOcelot](https://github.com/Burgyn/MMLib.SwaggerForOcelot) library has been used for documentation.  The configuration of the entire microservice architecture can be seen from the **ocelot.json** file which is located in the root path. All CRUD operations are included in the microservices, even if they will not be used. **ApplicationDBContexts** has been prepared in accordance with EF Core InMemory structure. In addition, **DataGenerator** classes has been included for dummy data. Database elements are as simple as possible in a non-relational database structure (So it can be easily convert to a non-relational NoSQL database), and It can be seen under the **Entities** folder. For **User** as entity, the point that I need to specify has not been prepared in accordance with any Identification, Authentication structure, it is completely fake. Request that are coming from gateway over microservices has been created with the help of traditional HttpClient, but it is necessary to use a gRPC-like protocol in real-time project. In general, the structure is available to be extended horizontally and vertically and to be worked independently by different groups.\n\n The **Review.API** project is as simple as possible. With the help of **Aggregators**, as I mentioned before, access to microservices has been provided with the help of HttpClient. Cache has been used, so quick callbacks can be obtained after the first query.\n\n Only 3 basic methods has been prepared in the test project. In one of them, can be inspect to comparison between the review summary and the review."
+  },
+  "tags": [
+    {
+      "name": "Review",
+      "description": "Includes all requests for reviews"
+    }
+  ],
+  "paths": {
+    "description": "Review",
+    "/api/review": {
+      "get": {
+        "tags": [
+          "Review"
+        ],
+        "summary": "Returns all reviews for all products",
+        "description": "Returns as list of a ReviewModel. It does not hold any parameters. You can reach at this area from definition selections.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json-patch+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReviewModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReviewModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReviewModel"
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReviewModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/review/{productId}": {
+      "get": {
+        "tags": [
+          "Review"
+        ],
+        "summary": "Returns single review for specified product",
+        "description": "Returns as a ReviewModel. The product Id is used as a parameter. Comments, recommendations, votes can be populated over their own swagger documentation. You can reach at this area from definition selections.",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/review/summary/{productId}": {
+      "get": {
+        "tags": [
+          "Review"
+        ],
+        "summary": "Returns single review summary for specified product",
+        "description": "Returns as a ReviewSummaryModel. The product Id is used as a parameter. Recommendations, votes can be populated over their own swagger documentation. You can reach at this area from definition selections.",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ProductModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RecommendationModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "recommendedTo": {
+            "type": "string",
+            "nullable": true
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReviewModel": {
+        "type": "object",
+        "properties": {
+          "productName": {
+            "type": "string",
+            "nullable": true
+          },
+          "recommendationPercantage": {
+            "type": "number",
+            "format": "double"
+          },
+          "averageScore": {
+            "type": "number",
+            "format": "double"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "product": {
+            "$ref": "#/components/schemas/ProductModel"
+          },
+          "recommendations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RecommendationModel"
+            },
+            "nullable": true
+          },
+          "comments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CommentModel"
+            },
+            "nullable": true
+          },
+          "votes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoteModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VoteModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "value": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "CommentModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ReviewSummaryModel": {
+        "type": "object",
+        "properties": {
+          "productName": {
+            "type": "string",
+            "nullable": true
+          },
+          "recommendationPercantage": {
+            "type": "number",
+            "format": "double"
+          },
+          "averageScore": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      }
+    }
+  }
+}
