@@ -1,0 +1,218 @@
+{
+
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/comment",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44312
+        }
+      ],
+      "UpstreamPathTemplate": "/api/comment",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "SwaggerKey": "comment"
+    },
+    {
+      "DownstreamPathTemplate": "/api/comment/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44312
+        }
+      ],
+      "UpstreamPathTemplate": "/api/comment/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ],
+      "SwaggerKey": "comment"
+    },
+    {
+      "DownstreamPathTemplate": "/api/comment/product/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44312
+        }
+      ],
+      "UpstreamPathTemplate": "/api/comment/product/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "SwaggerKey": "comment"
+    },
+    {
+      "DownstreamPathTemplate": "/api/product",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44387
+        }
+      ],
+      "UpstreamPathTemplate": "/api/product",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "SwaggerKey": "product"
+    },
+    {
+      "DownstreamPathTemplate": "/api/product/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44387
+        }
+      ],
+      "UpstreamPathTemplate": "/api/product/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ],
+      "SwaggerKey": "product"
+    },
+    {
+      "DownstreamPathTemplate": "/api/recommendation",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44381
+        }
+      ],
+      "UpstreamPathTemplate": "/api/recommendation",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "SwaggerKey": "recommendation"
+    },
+    {
+      "DownstreamPathTemplate": "/api/recommendation/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44381
+        }
+      ],
+      "UpstreamPathTemplate": "/api/recommendation/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ],
+      "SwaggerKey": "recommendation"
+    },
+    {
+      "DownstreamPathTemplate": "/api/recommendation/product/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44381
+        }
+      ],
+      "UpstreamPathTemplate": "/api/recommendation/product/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "SwaggerKey": "recommendation"
+    },
+    {
+      "DownstreamPathTemplate": "/api/user",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44356
+        }
+      ],
+      "UpstreamPathTemplate": "/api/user",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "SwaggerKey": "user"
+    },
+    {
+      "DownstreamPathTemplate": "/api/user/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44356
+        }
+      ],
+      "UpstreamPathTemplate": "/api/user/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ],
+      "SwaggerKey": "user"
+    },
+    {
+      "DownstreamPathTemplate": "/api/vote",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44377
+        }
+      ],
+      "UpstreamPathTemplate": "/api/vote",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "SwaggerKey": "vote"
+    },
+    {
+      "DownstreamPathTemplate": "/api/vote/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44377
+        }
+      ],
+      "UpstreamPathTemplate": "/api/vote/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ],
+      "SwaggerKey": "vote"
+    }
+
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "comment",
+      "Config": [
+        {
+          "Name": "Comment Web API",
+          "Version": "v1",
+          "Url": "https://localhost:44312/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "product",
+      "Config": [
+        {
+          "Name": "Product Web Api",
+          "Version": "v1",
+          "Url": "https://localhost:44387/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "recommendation",
+      "Config": [
+        {
+          "Name": "Recommendation Web Api",
+          "Version": "v1",
+          "Url": "https://localhost:44381/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "user",
+      "Config": [
+        {
+          "Name": "User Web Api",
+          "Version": "v1",
+          "Url": "https://localhost:44356/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "vote",
+      "Config": [
+        {
+          "Name": "Vote Web Api",
+          "Version": "v1",
+          "Url": "https://localhost:44377/swagger/v1/swagger.json"
+        }
+      ]
+    }
+
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:44345/"
+  }
+}
