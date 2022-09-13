@@ -16,4 +16,4 @@ You should select multiple projects as startup project before build and run. A d
 
 ## License
 
-DIYI is licensed under the [MIT license](LICENSE.TXT).
+DIYI is licensed under the [MIT license](LICENSE).
